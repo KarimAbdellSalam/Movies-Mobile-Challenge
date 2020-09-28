@@ -39,7 +39,9 @@ public class MainActivityTest {
 
     @Test
     public void checkViewsDisplay() {
-        onView(withId(R.id.textView))
+        onView(withId(R.id.searchView))
+                .check(matches(isDisplayed()));
+        onView(withId(R.id.movieAct_Rc))
                 .check(matches(isDisplayed()));
 
     }

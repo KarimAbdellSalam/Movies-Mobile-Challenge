@@ -2,6 +2,9 @@ package com.swvl.swvlchallenge.ui.main;
 
 import android.os.Bundle;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.swvl.swvlchallenge.BR;
 import com.swvl.swvlchallenge.R;
 import com.swvl.swvlchallenge.databinding.ActivityMainBinding;
@@ -23,6 +26,10 @@ public class MainActivity extends BaseActivity<MainViewModel> {
 
     @Override
     public void init() {
+        RecyclerView recyclerView = ((ActivityMainBinding) getViewDataBinding()).movieActRc;
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -39,6 +46,6 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = (ActivityMainBinding) getViewDataBinding();
-
+        viewModel.loadData();
     }
 }

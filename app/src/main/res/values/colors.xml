@@ -6,5 +6,9 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="background">#1D1D1D</color>
+    <color name="white_20">#34FFFFFF</color>
+    <color name="white_30">#4DFFFFFF</color>
+    <color name="colorPrimary_20">#33643935</color>
+    <color name="dark_transparent_light">#50000000</color>
 
 </resources>
