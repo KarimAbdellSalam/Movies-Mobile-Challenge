@@ -19,6 +19,7 @@ import io.reactivex.rxjava3.schedulers.TestScheduler;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.doReturn;
 
@@ -47,5 +48,12 @@ public class MainViewModelTest {
         Movie movie = new Movie();
         movie.setTitle("Test Movie");
         movies.add(movie);
+        
+        assertEquals(mainViewModel.getMoviesData().get().size(),0);
+        mainViewModel.loadData();
+        assertNotNull(mainViewModel.getMoviesData().get());
+        assertEquals(mainViewModel.getMoviesData().get().getClass(),movies.getClass());
+        assertNotEquals(mainViewModel.getMoviesData().get().size(),0);
+
     }
 }

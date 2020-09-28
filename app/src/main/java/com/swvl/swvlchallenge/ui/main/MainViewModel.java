@@ -49,12 +49,8 @@ public class MainViewModel extends BaseViewModel implements IMainViewModel, OnIn
         movies.add(movie);
         movies.add(movie);
         movies.add(movie);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                moviesData.set(movies);
-            }
-        }, 2000);
+        moviesData.set(movies);
+
     }
 
     @Override
