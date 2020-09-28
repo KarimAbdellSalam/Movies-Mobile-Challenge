@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.ViewModel;
 
-
 import com.swvl.swvlchallenge.ApplicationClass;
 import com.swvl.swvlchallenge.dagger.ApplicationComponent;
 
