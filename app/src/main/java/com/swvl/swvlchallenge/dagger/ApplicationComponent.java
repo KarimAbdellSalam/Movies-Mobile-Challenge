@@ -3,6 +3,7 @@ package com.swvl.swvlchallenge.dagger;
 import android.content.Context;
 
 import com.swvl.swvlchallenge.ApplicationClass;
+import com.swvl.swvlchallenge.ui.base.ResourceProvider;
 
 import javax.inject.Singleton;
 
@@ -18,4 +19,5 @@ import dagger.android.AndroidInjectionModule;
 public interface ApplicationComponent {
     Context context();
     void inject(ApplicationClass applicationClass);
+    ResourceProvider getResourceProvider();
 }
