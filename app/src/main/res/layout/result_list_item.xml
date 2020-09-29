@@ -24,41 +24,23 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/movieItem_titleTv"
-            android:layout_width="0dp"
+            android:id="@+id/resultItem_titleTv"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:layout_marginEnd="16dp"
             android:text="@{viewModel.movie.title}"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/movieItem_ratingTv"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
-            tools:text="Interstellar " />
+            tools:text="Interstellar" />
 
         <TextView
-            android:id="@+id/movieItem_yearTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:textSize="16sp"
-            android:text="@{viewModel.movie.year+``}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textColor="@color/white_60"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movieItem_titleTv"
-            app:layout_constraintVertical_bias="0"
-            tools:text="2012" />
-
-        <TextView
-            android:id="@+id/movieItem_ratingTv"
+            android:id="@+id/resultItem_ratingTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -75,7 +57,7 @@
             tools:text="4.3" />
 
         <TextView
-            android:id="@+id/movieItem_genresTv"
+            android:id="@+id/resultItem_genresTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
@@ -89,7 +71,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/movieItem_yearTv"
+            app:layout_constraintTop_toBottomOf="@+id/resultItem_titleTv"
             app:layout_constraintVertical_bias="0"
             tools:text="Action" />
 

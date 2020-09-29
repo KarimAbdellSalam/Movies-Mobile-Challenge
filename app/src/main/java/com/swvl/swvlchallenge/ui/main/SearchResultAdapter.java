@@ -11,6 +11,7 @@ import com.swvl.swvlchallenge.data.model.DataItem;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.databinding.HeaderItemBinding;
 import com.swvl.swvlchallenge.databinding.MovieListItemBinding;
+import com.swvl.swvlchallenge.databinding.ResultListItemBinding;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_NORMAL) {
-            MovieListItemBinding itemBinding = MovieListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+            ResultListItemBinding itemBinding = ResultListItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
             return new ViewHolder(itemBinding);
         } else {
             HeaderItemBinding layoutProgressBinding = HeaderItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
@@ -97,9 +98,9 @@ public class SearchResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private class ViewHolder extends RecyclerView.ViewHolder implements OnInteractionListener {
 
-        private final MovieListItemBinding binding;
+        private final ResultListItemBinding binding;
 
-        public ViewHolder(MovieListItemBinding binding) {
+        public ViewHolder(ResultListItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

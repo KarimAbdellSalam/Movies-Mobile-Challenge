@@ -108,6 +108,10 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
     private void submit(String action, String query) {
         if (Utils.TextUtils.isEmpty(query)) {
             getNavigator().startSearching(action, query);
+            if (handler != null) {
+                if (runnable != null)
+                    handler.removeCallbacks(runnable);
+            }
             return;
         }
 
@@ -183,7 +187,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
         return adapter;
     }
 
-    public SearchResultAdapter getsearchResultAdapter() {
+    public SearchResultAdapter getSearchResultAdapter() {
         return searchResultAdapter;
     }
 
