@@ -1,6 +1,7 @@
 package com.swvl.swvlchallenge.data;
 
 import com.swvl.swvlchallenge.data.model.DataItem;
+import com.swvl.swvlchallenge.data.model.FlickrResponse;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.data.remote.ApiHelper;
 
@@ -10,7 +11,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Completable;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 
 /**
  * Created by Karim Abdell Salam on 28,September,2020
@@ -35,4 +38,7 @@ public interface DataHelper extends ApiHelper {
 
     @NotNull
     List<DataItem> getSectionedList(LinkedHashMap<Integer, List<Movie>> sortedLinkedMap);
+
+
+    public Single<List<FlickrResponse.Photo>> filterMovies(FlickrResponse flickrResponse, String title);
 }

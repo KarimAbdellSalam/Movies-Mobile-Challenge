@@ -58,7 +58,24 @@ public class MovieInteractor implements IMovieInteractor{
 
     @Override
     public void filterImages(FlickrResponse flickrResponse, String title, InteractorCallback<List<FlickrResponse.Photo>> callback) {
-        callback.onSuccess(new ArrayList<>()); //todo filter images
+        dataHelper.filterMovies(flickrResponse, title)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(new SingleObserver<List<FlickrResponse.Photo>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onSuccess(List<FlickrResponse.Photo> response) {
+                        callback.onSuccess(response);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+                });
     }
 
 

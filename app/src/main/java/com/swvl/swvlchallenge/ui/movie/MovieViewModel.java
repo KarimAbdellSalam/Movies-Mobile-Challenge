@@ -50,13 +50,11 @@ public class MovieViewModel extends BaseViewModel {
         interactor.searchPhotos(currentPage, PER_PAGE, movie.getTitle(), new InteractorCallback<FlickrResponse>() {
             @Override
             public void onSuccess(FlickrResponse flickrResponse) {
-                //filter flickr list, it may reduce the number of fetched image
+                //filter flickr list, it may reduce the number of fetched image to zero photo
                 interactor.filterImages(flickrResponse, movie.getTitle(), new InteractorCallback<List<FlickrResponse.Photo>>() {
                     @Override
                     public void onSuccess(List<FlickrResponse.Photo> photos) {
-                        //todo check the list size to get at least ${MIN_IMAGES} images of exact movie
-                        //todo if there are no enough photos fetch another page (at most ${MAX_PAGES})
-                        displayImages(photos);
+                        displayImages(photos,flickrResponse);
                     }
 
                     @Override
@@ -72,10 +70,28 @@ public class MovieViewModel extends BaseViewModel {
             }
         });
     }
-
-    private void displayImages(List<FlickrResponse.Photo> photos) {
-        flickrPhotos.set(photos);
-        flickrPhotos.notifyChange();
+    /* check the list size to get at least ${MIN_IMAGES} images of exact movie
+     if there are no enough photos fetch another page (at most ${MAX_PAGES})
+     */
+    private void displayImages(List<FlickrResponse.Photo> photos, FlickrResponse flickrResponse) {
+        if (!photos.isEmpty()) {
+            setIsLoading(false);
+            flickrPhotos.get().addAll(photos);
+            flickrPhotos.notifyChange();
+        }
+        // At least MIN_IMAGES to stop fetching
+        if (flickrPhotos.get().size() >= MIN_IMAGES) {
+            currentPage = 1;
+        } else {
+            // load more pages (MAX_PAGES) to reach the minimum required images
+            if (flickrResponse.getPhotos().getPages() > currentPage && MAX_PAGES >= currentPage) {
+                currentPage++;
+                loadFlickrImages();
+            } else {
+                setIsLoading(false);
+                flickrPhotos.notifyChange();
+            }
+        }
     }
 
     private void showToast(String message) {

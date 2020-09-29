@@ -107,7 +107,7 @@ public class ImagesListAdapter extends RecyclerView.Adapter<BaseViewHolder>{
 
         @Override
         public void onBind(int position) {
-            String item = ""; //todo generate flickr image full path
+            String item = Utils.Const.HTTP.getFlickrImagePath(listItems.get(position));
             binding.setImagePath(item);
             binding.executePendingBindings();
         }

@@ -10,6 +10,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import com.swvl.swvlchallenge.R;
+import com.swvl.swvlchallenge.data.model.FlickrResponse;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +30,10 @@ public class Utils {
             public static final long TIMEOUT = 120;
             public static final String OK  ="ok";
             public static final String API_FAILED = "Failed";
+
+            public static String getFlickrImagePath(FlickrResponse.Photo photo) {
+                return String.format("http://farm%s.static.flickr.com/%s/%s_%s.jpg", photo.getFarm(), photo.getServer(), photo.getId(), photo.getSecret());
+            }
         }
 
         public class Action {

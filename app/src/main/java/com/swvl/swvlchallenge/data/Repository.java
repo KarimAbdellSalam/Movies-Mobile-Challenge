@@ -143,4 +143,20 @@ public class Repository implements DataHelper {
         String searchQuery = Utils.TextUtils.removeUnnecessaryCharacters(movieName);
         return flickerApi.searchMovieImages(Utils.Const.Ref.FLICKR_METHOD, BuildConfig.FLICKR_API_KEY, "json", 1, searchQuery, page, perPage);
     }
+
+    @Override
+    public Single<List<FlickrResponse.Photo>> filterMovies(FlickrResponse flickrResponse, String title) {
+        return Single.fromCallable(new Callable<List<FlickrResponse.Photo>>() {
+            @Override
+            public List<FlickrResponse.Photo> call() throws Exception {
+                return flickrResponse
+                        .getPhotos()
+                        .getPhoto().stream()
+                        .parallel()
+                        .filter(movie -> movie.getTitle()
+                                .equals(title))
+                        .collect(Collectors.toList());
+            }
+        });
+    }
 }
