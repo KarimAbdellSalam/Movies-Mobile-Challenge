@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 android {
     compileSdkVersion 29
     buildToolsVersion "30.0.0"
@@ -16,8 +17,15 @@ android {
 
     buildTypes {
         release {
+            buildConfigField "String", "FLICKR_BASE_URL", properties.getProperty("flickrBaseURL")
+            buildConfigField "String", "FLICKR_API_KEY", properties.getProperty("flickrApiKey")
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "String", "FLICKR_BASE_URL", properties.getProperty("flickrBaseURLDev")
+            buildConfigField "String", "FLICKR_API_KEY", properties.getProperty("flickrApiKeyDev")
         }
     }
     dexOptions {
@@ -47,7 +55,7 @@ dependencies {
 
     // font
     implementation 'io.github.inflationx:viewpump:2.0.3'
-    
+
     // parser
     implementation "com.google.code.gson:gson:2.8.6"
     // network

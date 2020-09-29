@@ -6,9 +6,12 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.swvl.swvlchallenge.ApplicationClass;
+import com.swvl.swvlchallenge.BuildConfig;
 import com.swvl.swvlchallenge.data.DataHelper;
 import com.swvl.swvlchallenge.data.Repository;
 import com.swvl.swvlchallenge.utils.Utils;
+import com.swvl.swvlchallenge.utils.rx.AppSchedulerProvider;
+import com.swvl.swvlchallenge.utils.rx.SchedulerProvider;
 
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 
@@ -51,7 +54,7 @@ public class AppModule {
 
     @Provides
     @Singleton
-    OkHttpClient provideOkHttpClient() { // TODO add custom interceptor class if u need to add header and some data
+    OkHttpClient provideOkHttpClient() { // TODO add custom interceptor class if u need to add header and some Data
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         return new OkHttpClient.Builder()
@@ -71,9 +74,18 @@ public class AppModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient)
-                .baseUrl("<Base url>") //todo ADD base url later
+                .baseUrl(BuildConfig.FLICKR_BASE_URL) //todo ADD base url later
                 .build(); // Base URL to create instance
     }
+    @Provides
+    @Singleton
+    public Gson provideGson() {
+        return new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+    }
 
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
+    }
 
 }
