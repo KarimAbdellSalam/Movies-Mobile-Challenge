@@ -1,6 +1,7 @@
 package com.swvl.swvlchallenge.ui.main;
 
 import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.swvl.swvlchallenge.BR;
 import com.swvl.swvlchallenge.R;
+import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.databinding.ActivityMainBinding;
+import com.swvl.swvlchallenge.manager.ScreenControl;
 import com.swvl.swvlchallenge.ui.base.BaseActivity;
 import com.swvl.swvlchallenge.utils.Utils;
 
@@ -22,6 +25,10 @@ public class MainActivity extends BaseActivity<MainViewModel> implements MainNav
 
     private ActivityMainBinding binding;
 
+    public static Intent newIntent(Context context) {
+        return new Intent(context, MainActivity.class);
+    }
+
     @Override
     public int getBindingVariable() {
         return BR.viewModel;
@@ -29,10 +36,15 @@ public class MainActivity extends BaseActivity<MainViewModel> implements MainNav
 
     @Override
     public void init() {
-        RecyclerView recyclerView = ((ActivityMainBinding) getViewDataBinding()).movieActRc;
+        RecyclerView recyclerView = ((ActivityMainBinding) getViewDataBinding()).mainActRc;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);
+
+        RecyclerView searchResultsRc = ((ActivityMainBinding) getViewDataBinding()).mainActSearchResultRc;
+        searchResultsRc.setLayoutManager(new LinearLayoutManager(this));
+        searchResultsRc.setHasFixedSize(true);
+        searchResultsRc.setNestedScrollingEnabled(false);
     }
 
     @Override
@@ -81,5 +93,10 @@ public class MainActivity extends BaseActivity<MainViewModel> implements MainNav
 
     private void queryChanged(String query) {
         viewModel.updateQuery(query);
+    }
+
+    @Override
+    public void openMovieActivity(Movie movie) {
+        ScreenControl.openMovieActivity(this, movie);
     }
 }

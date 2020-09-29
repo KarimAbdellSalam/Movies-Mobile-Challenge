@@ -25,7 +25,7 @@ import javax.inject.Inject;
  */
 public class MainViewModel extends BaseViewModel<MainNavigator> implements IMainViewModel, OnInteractionListener {
 
-    private  IMainInteractor interactor;
+    private IMainInteractor interactor;
     ObservableField<List<Movie>> moviesData = new ObservableField<>(new ArrayList<>());
     ObservableField<List<DataItem>> resultItems = new ObservableField<>(new ArrayList<>());
 
@@ -58,6 +58,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
         interactor.loadAllMovies(interactorCallback);
         adapter.setOnInteractionListener(this);
     }
+
     InteractorCallback<List<Movie>> interactorCallback = new InteractorCallback<List<Movie>>() {
         @Override
         public void onSuccess(List<Movie> movies) {
@@ -71,9 +72,10 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
             hideLoading();
         }
     };
+
     @Override
     public void onItemClicked(Movie item) {
-        //todo go to Movie screen
+        getNavigator().openMovieActivity(item);
     }
 
     SearchView.OnQueryTextListener onQueryTextListener = new SearchView.OnQueryTextListener() {
@@ -121,7 +123,9 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
         handler = new Handler();
         handler.postDelayed(runnable, SUBMISSION_TIME);
     }
-    private String query="";
+
+    private String query = "";
+
     @Override
     public void updateQuery(String query) {
         if (Utils.TextUtils.isEmpty(query)) {
@@ -177,9 +181,11 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
     public MovieListAdapter getAdapter() {
         return adapter;
     }
+
     public SearchResultAdapter getsearchResultAdapter() {
         return searchResultAdapter;
     }
+
     public void setAdapter(MovieListAdapter adapter) {
         this.adapter = adapter;
     }

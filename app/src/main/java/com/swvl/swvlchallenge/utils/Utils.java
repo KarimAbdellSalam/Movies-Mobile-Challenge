@@ -31,6 +31,10 @@ public class Utils {
         public class Action {
             public static final String END_SEARCH = "action_end_search";
         }
+
+        public class Ref {
+            public static final String MOVIE = "movie";
+        }
     }
 
     public static class UI {

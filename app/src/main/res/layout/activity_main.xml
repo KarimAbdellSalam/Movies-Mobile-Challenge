@@ -20,7 +20,7 @@
         android:background="@color/background">
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+            android:id="@+id/mainAct_searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white_30"
@@ -37,7 +37,7 @@
             app:showDividers="middle" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movieAct_Rc"
+            android:id="@+id/mainAct_Rc"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/background"
@@ -50,12 +50,12 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@+id/mainAct_searchView"
             tools:listitem="@layout/movie_list_item"
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/movieAct_searchResultRc"
+            android:id="@+id/mainAct_searchResultRc"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/background"
@@ -68,12 +68,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            app:layout_constraintTop_toBottomOf="@+id/mainAct_searchView"
             tools:listitem="@layout/header_item"
             tools:visibility="gone" />
 
 
         <TextView
+            android:id="@+id/mainAct_noDataTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/no_movies"
