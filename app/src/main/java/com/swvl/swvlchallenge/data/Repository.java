@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.swvl.swvlchallenge.BuildConfig;
 import com.swvl.swvlchallenge.data.model.DataItem;
+import com.swvl.swvlchallenge.data.model.FlickrResponse;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.data.model.MoviesJsonFile;
 import com.swvl.swvlchallenge.data.remote.ProjectApi;

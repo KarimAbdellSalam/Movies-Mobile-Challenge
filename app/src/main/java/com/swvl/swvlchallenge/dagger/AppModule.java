@@ -74,7 +74,7 @@ public class AppModule {
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(okHttpClient)
-                .baseUrl(BuildConfig.FLICKR_BASE_URL) //todo ADD base url later
+                .baseUrl(BuildConfig.FLICKR_BASE_URL)
                 .build(); // Base URL to create instance
     }
     @Provides

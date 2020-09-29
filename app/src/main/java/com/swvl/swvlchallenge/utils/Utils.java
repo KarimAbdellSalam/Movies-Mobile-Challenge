@@ -3,6 +3,7 @@ package com.swvl.swvlchallenge.utils;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
@@ -93,4 +94,15 @@ public class Utils {
         }
     }
 
+    public static class Screen {
+        public static int dpToPx(float dp) {
+            float density = Resources.getSystem().getDisplayMetrics().density;
+            return Math.round(dp * density);
+        }
+
+        public static float pxToDp(float px) {
+            float densityDpi = Resources.getSystem().getDisplayMetrics().densityDpi;
+            return px / (densityDpi / 160f);
+        }
+    }
 }

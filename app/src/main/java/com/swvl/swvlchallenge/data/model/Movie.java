@@ -72,4 +72,24 @@ public class Movie extends BaseObservable implements Serializable {
         this.rating = rating;
         notifyChange();
     }
+
+    public String getGenresString() {
+        if (genres == null || genres.isEmpty())
+            return "";
+        StringBuilder builder = new StringBuilder(genres.get(0));
+        for (int i = 1; i < genres.size(); i++) {
+            builder.append(" / ").append(genres.get(i));
+        }
+        return builder.toString();
+    }
+
+    public String getCastString() {
+        if (cast == null || cast.isEmpty())
+            return "";
+        StringBuilder builder = new StringBuilder(cast.get(0));
+        for (int i = 1; i < cast.size(); i++) {
+            builder.append("  ").append(cast.get(i));
+        }
+        return builder.toString();
+    }
 }

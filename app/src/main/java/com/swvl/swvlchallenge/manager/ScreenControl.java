@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.ui.main.MainActivity;
+import com.swvl.swvlchallenge.ui.movie.MovieActivity;
 import com.swvl.swvlchallenge.utils.Utils;
 
 /**
@@ -16,9 +17,8 @@ public class ScreenControl {
     }
 
     public static void openMovieActivity(Activity activity, Movie movie) {
-        //todo
-//        Intent intent = MovieActivity.newIntent(activity);
-//        intent.putExtra(Utils.Const.Ref.MOVIE, movie);
-//        activity.startActivity(intent);
+        Intent intent = MovieActivity.newIntent(activity);
+        intent.putExtra(Utils.Const.Ref.MOVIE, movie);
+        activity.startActivity(intent);
     }
 }

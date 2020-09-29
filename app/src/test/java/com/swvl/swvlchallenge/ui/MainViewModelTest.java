@@ -138,8 +138,6 @@ public class MainViewModelTest {
     public void tearDown() throws Exception {
         mTestScheduler = null;
         mainViewModel = null;
-        mViewModel = null;
-
     }
 
 }
