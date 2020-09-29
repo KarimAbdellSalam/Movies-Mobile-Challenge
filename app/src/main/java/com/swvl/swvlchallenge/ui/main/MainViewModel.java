@@ -57,6 +57,7 @@ public class MainViewModel extends BaseViewModel<MainNavigator> implements IMain
         showLoading();
         interactor.loadAllMovies(interactorCallback);
         adapter.setOnInteractionListener(this);
+        searchResultAdapter.setOnInteractionListener(this);
     }
 
     InteractorCallback<List<Movie>> interactorCallback = new InteractorCallback<List<Movie>>() {

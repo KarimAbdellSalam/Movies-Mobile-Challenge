@@ -57,7 +57,7 @@ public class BindingAdaptation {
         adapter.updateItems(list);
     }
 
-    @BindingAdapter({"app:adapter", "app:data"})
+    @BindingAdapter({"app:adapter", "app:dataItems"})
     public static void bindMovieImages(RecyclerView recyclerView, ImagesListAdapter adapter, List<FlickrResponse.Photo> list) {
         recyclerView.setAdapter(adapter);
         adapter.updateItems(list);
