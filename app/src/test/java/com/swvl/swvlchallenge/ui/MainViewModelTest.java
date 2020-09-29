@@ -10,6 +10,7 @@ import com.swvl.swvlchallenge.ui.main.MainViewModel;
 import com.swvl.swvlchallenge.ui.rx.TestSchedulerProvider;
 
 import org.jetbrains.annotations.NotNull;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -112,6 +113,7 @@ public class MainViewModelTest {
         assertEquals(mainViewModel.getResultItems().get(), dataItems);
     }
 
+
     @NotNull
     private List<Movie> getMovies() {
         List<Movie> movies = new ArrayList<>();
@@ -131,4 +133,13 @@ public class MainViewModelTest {
         movie.setRating(1 + new Random().nextFloat() * (5 - 1));
         return movie;
     }
+
+    @After
+    public void tearDown() throws Exception {
+        mTestScheduler = null;
+        mainViewModel = null;
+        mViewModel = null;
+
+    }
+
 }
