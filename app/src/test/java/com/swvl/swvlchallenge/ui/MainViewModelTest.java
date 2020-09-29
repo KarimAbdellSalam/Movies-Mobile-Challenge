@@ -66,7 +66,7 @@ public class MainViewModelTest {
 
     @Test
     public void test_loading_movies() {
-        List<Movie> movies = getMovies();
+        List<Movie> movies = Movie.Mock.getMovies();
         assertEquals(mainViewModel.getMoviesData().get().size(), 0);
 
         doReturn(Observable.just(movies))
@@ -85,12 +85,12 @@ public class MainViewModelTest {
     @Test
     public void test_search_movies() {
 
-        List<Movie> movies = getMovies();
+        List<Movie> movies = Movie.Mock.getMovies();
         List<DataItem> dataItems = new ArrayList<>();
         DataItem dataItemHeader = new DataItem();
         DataItem dataItemMovies = new DataItem();
         dataItemHeader.setHeaderItem(new DataItem.Header("2012"));
-        dataItemMovies.setMovieItem(new DataItem.MovieItem(getMovie()));
+        dataItemMovies.setMovieItem(new DataItem.MovieItem(Movie.Mock.getMovie()));
         dataItems.add(dataItemHeader);
         dataItems.add(dataItemMovies);
         dataItems.add(dataItemMovies);
@@ -114,25 +114,7 @@ public class MainViewModelTest {
     }
 
 
-    @NotNull
-    private List<Movie> getMovies() {
-        List<Movie> movies = new ArrayList<>();
-        movies.add(getMovie());
-        movies.add(getMovie());
-        movies.add(getMovie());
-        movies.add(getMovie());
-        return movies;
-    }
 
-    @NotNull
-    private Movie getMovie() {
-        int arr[] = {2002, 2004, 2005, 2008, 2009, 2011, 2012};
-        Movie movie = new Movie();
-        movie.setTitle("Test Movie");
-        movie.setYear(arr[new Random().nextInt(arr.length)]);
-        movie.setRating(1 + new Random().nextFloat() * (5 - 1));
-        return movie;
-    }
 
     @After
     public void tearDown() throws Exception {

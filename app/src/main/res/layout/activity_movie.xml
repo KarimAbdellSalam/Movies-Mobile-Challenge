@@ -30,7 +30,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/title"
+            android:id="@+id/movieAct_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -50,22 +50,22 @@
             tools:text="Final Destination 4" />
 
         <TextView
-            android:id="@+id/rating"
+            android:id="@+id/movieAct_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:text="@{viewModel.movie.rating+``}"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintBottom_toBottomOf="@+id/movieAct_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/title"
+            app:layout_constraintTop_toTopOf="@+id/movieAct_title"
             tools:text="3.0" />
 
         <TextView
-            android:id="@+id/year"
+            android:id="@+id/movieAct_year"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -78,12 +78,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/title"
+            app:layout_constraintTop_toBottomOf="@+id/movieAct_title"
             app:layout_constraintVertical_bias="0"
             tools:text="2010" />
 
         <TextView
-            android:id="@+id/genres"
+            android:id="@+id/movieAct_genres"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -99,13 +99,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/year"
+            app:layout_constraintTop_toBottomOf="@+id/movieAct_year"
             app:layout_constraintVertical_bias="0"
             tools:text="2010"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/castLabel"
+            android:id="@+id/movieAct_castLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -119,12 +119,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/genres"
+            app:layout_constraintTop_toBottomOf="@+id/movieAct_genres"
             app:layout_constraintVertical_bias="0"
             tools:visibility="visible" />
 
         <TextView
-            android:id="@+id/cast"
+            android:id="@+id/movieAct_cast"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -140,13 +140,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/castLabel"
+            app:layout_constraintTop_toBottomOf="@+id/movieAct_castLabel"
             app:layout_constraintVertical_bias="0"
             tools:text="2010"
             tools:visibility="visible" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/modelAct_Rc"
+            android:id="@+id/movieAct_Rc"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="16dp"
@@ -158,18 +158,19 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cast"
+            app:layout_constraintTop_toBottomOf="@+id/movieAct_cast"
             tools:listitem="@layout/flickr_list_item" />
 
         <ProgressBar
+            android:id="@+id/movieAct_loadingPr"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:visibility="@{viewModel.isLoading?View.VISIBLE:View.GONE}"
             app:layout_constraintVertical_bias="0.15"
-            app:layout_constraintBottom_toBottomOf="@+id/modelAct_Rc"
-            app:layout_constraintEnd_toEndOf="@+id/modelAct_Rc"
+            app:layout_constraintBottom_toBottomOf="@+id/movieAct_Rc"
+            app:layout_constraintEnd_toEndOf="@+id/movieAct_Rc"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/modelAct_Rc" />
+            app:layout_constraintTop_toTopOf="@+id/movieAct_Rc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

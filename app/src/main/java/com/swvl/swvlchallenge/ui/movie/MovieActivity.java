@@ -67,7 +67,7 @@ public class MovieActivity extends ActivityWithBack<MovieViewModel> {
         boolean includeEdge = true;
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, spanCount);
 
-        RecyclerView recyclerView = ((ActivityMovieBinding) getViewDataBinding()).modelActRc;
+        RecyclerView recyclerView = ((ActivityMovieBinding) getViewDataBinding()).movieActRc;
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setHasFixedSize(true);
         recyclerView.setNestedScrollingEnabled(false);

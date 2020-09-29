@@ -5,8 +5,13 @@ import androidx.databinding.BaseObservable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Karim Abdell Salam on 29,September,2020
@@ -91,5 +96,37 @@ public class Movie extends BaseObservable implements Serializable {
             builder.append("  ").append(cast.get(i));
         }
         return builder.toString();
+    }
+
+    public static class Mock {
+        @NotNull
+        public static List<Movie> getMovies() {
+            List<Movie> movies = new ArrayList<>();
+            movies.add(getMovie());
+            movies.add(getMovie());
+            movies.add(getMovie());
+            movies.add(getMovie());
+            return movies;
+        }
+
+        @NotNull
+        public static Movie getMovie() {
+            int arr[] = {2002, 2004, 2005, 2008, 2009, 2011, 2012};
+            String genres[] = {"Romance",
+                    "Comedy", "Action"};
+            String cast[] = {"John Cena",
+                    "Ashley Scott",
+                    "Steve Harris",
+                    "Aidan Gillen",
+                    "Brian J. White",
+                    "Taylor Cole"};
+            Movie movie = new Movie();
+            movie.setTitle("Test Movie");
+            movie.setYear(arr[new Random().nextInt(arr.length)]);
+            movie.setRating(1 + new Random().nextFloat() * (5 - 1));
+            movie.setGenres(Arrays.asList(genres));
+            movie.setCast(Arrays.asList(cast));
+            return movie;
+        }
     }
 }
