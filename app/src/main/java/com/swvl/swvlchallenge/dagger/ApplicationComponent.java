@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.swvl.swvlchallenge.ApplicationClass;
 import com.swvl.swvlchallenge.ui.base.ResourceProvider;
+import com.swvl.swvlchallenge.ui.main.MainInteractor;
 
 import javax.inject.Singleton;
 
@@ -20,4 +21,5 @@ public interface ApplicationComponent {
     Context context();
     void inject(ApplicationClass applicationClass);
     ResourceProvider getResourceProvider();
+    MainInteractor getMainInteractor();
 }
