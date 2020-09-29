@@ -75,6 +75,16 @@ public class Utils {
         public static boolean isEmpty(CharSequence str) {
             return str == null || str.length() == 0;
         }
+
+        public static String removeUnnecessaryCharacters(String word) {
+            if (TextUtils.isEmpty(word))
+                return "";
+            String regex = "[^a-zA-Z0-9\\s]";
+            String regexSpaces = "\\s{2,}";
+            return word.replaceAll(regex, "")
+                    .replaceAll(regexSpaces, " ")
+                    .toLowerCase();
+        }
     }
 
 }
