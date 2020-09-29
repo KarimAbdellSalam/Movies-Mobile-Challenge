@@ -3,6 +3,7 @@ package com.swvl.swvlchallenge.ui;
 import com.swvl.swvlchallenge.data.DataHelper;
 import com.swvl.swvlchallenge.data.model.FlickrResponse;
 import com.swvl.swvlchallenge.ui.base.UIHelper;
+import com.swvl.swvlchallenge.ui.movie.MovieInteractor;
 import com.swvl.swvlchallenge.ui.movie.MovieViewModel;
 import com.swvl.swvlchallenge.ui.rx.TestSchedulerProvider;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Random;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.schedulers.TestScheduler;
 
 import static org.junit.Assert.assertEquals;
@@ -51,9 +53,9 @@ public class MovieViewModelTest {
     public void setUp() throws Exception {
         mTestScheduler = new TestScheduler();
         TestSchedulerProvider testSchedulerProvider = new TestSchedulerProvider(mTestScheduler);
-        //  MovieInteractor mainInteractor = new MovieInteractor(dataHelper, testSchedulerProvider);
+        MovieInteractor movieInteractor = new MovieInteractor(dataHelper, testSchedulerProvider);
         movieViewModel = new MovieViewModel();
-        //movieViewModel.setInteractor(mainInteractor);
+        movieViewModel.setInteractor(movieInteractor);
         movieViewModel.setUIHelper(uiHelper);
 
     }
@@ -64,15 +66,14 @@ public class MovieViewModelTest {
 
         assertEquals(movieViewModel.getPhotos().get().size(), 0);
 
-        doReturn(Observable.just(photos))
+        doReturn(Single.just(photos))
                 .when(dataHelper)
-                .searchImagesByMovieName("Mission Impossible",1,400);
+                .searchImagesByMovieName("Mission Impossible", 1, 400);
 
         movieViewModel.loadFlickrImages();
         mTestScheduler.triggerActions();
 
-        verify(uiHelper, atLeast(1)).showLoading();
-        verify(uiHelper, atLeast(1)).hideLoading();
+        assertEquals(movieViewModel.getPhotos().get(), photos);
 
     }
 

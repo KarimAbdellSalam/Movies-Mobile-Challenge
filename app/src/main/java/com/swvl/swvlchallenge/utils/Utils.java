@@ -27,6 +27,8 @@ public class Utils {
             public static final long WRITE_TIMEOUT = 120;
             public static final long READ_TIMEOUT = 120;
             public static final long TIMEOUT = 120;
+            public static final String OK  ="ok";
+            public static final String API_FAILED = "Failed";
         }
 
         public class Action {

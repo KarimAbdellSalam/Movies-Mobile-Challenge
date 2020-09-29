@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.swvl.swvlchallenge.dagger.AppModule;
 import com.swvl.swvlchallenge.dagger.ApplicationComponent;
 import com.swvl.swvlchallenge.dagger.DaggerApplicationComponent;
+import com.swvl.swvlchallenge.utils.AppLogger;
 
 import javax.inject.Inject;
 
@@ -34,6 +35,7 @@ public class ApplicationClass extends Application implements HasActivityInjector
     @Override
     public void onCreate() {
         super.onCreate();
+        AppLogger.init();
         initBuild();
     }
 
