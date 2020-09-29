@@ -34,6 +34,8 @@ public class Utils {
 
         public class Ref {
             public static final String MOVIE = "movie";
+            public static final String FLICKR_METHOD = "flickr.photos.search";
+
         }
     }
 

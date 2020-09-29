@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.swvl.swvlchallenge.BuildConfig;
 import com.swvl.swvlchallenge.data.model.DataItem;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.data.model.MoviesJsonFile;
+import com.swvl.swvlchallenge.data.remote.ProjectApi;
 import com.swvl.swvlchallenge.utils.Utils;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.core.Single;
 import retrofit2.Retrofit;
 
 import static java.util.stream.Collectors.groupingBy;
@@ -33,9 +36,10 @@ import static java.util.stream.Collectors.groupingBy;
 public class Repository implements DataHelper {
     private Gson gson;
     Context mContext;
-
+    ProjectApi.FlickerApi flickerApi;
     @Inject
     public Repository(Retrofit retrofit, Context mContext, Gson gson) {
+        flickerApi = retrofit.create(ProjectApi.FlickerApi.class);
         this.mContext = mContext;
         this.gson = gson;
     }
@@ -130,5 +134,12 @@ public class Repository implements DataHelper {
             }
         }
         return dataItems;
+    }
+
+    @Override
+    public Single<FlickrResponse> searchImagesByMovieName(String movieName, int page, int perPage) {
+        // remove unnecessary characters which may improve the flickr search results
+        String searchQuery = Utils.TextUtils.removeUnnecessaryCharacters(movieName);
+        return flickerApi.searchMovieImages(Utils.Const.Ref.FLICKR_METHOD, BuildConfig.FLICKR_API_KEY, "json", 1, searchQuery, page, perPage);
     }
 }
