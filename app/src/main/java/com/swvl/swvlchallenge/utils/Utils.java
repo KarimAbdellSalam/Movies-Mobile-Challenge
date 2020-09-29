@@ -19,6 +19,8 @@ import java.io.InputStream;
 
 public class Utils {
     public static class Const {
+        public static final String SEED_MOVIE_JSON = "movies/movies.json";
+
         public static class HTTP {
             // in milliseconds
             public static final long WRITE_TIMEOUT = 120;
@@ -53,7 +55,7 @@ public class Utils {
         }
     }
 
-    public static class data {
+    public static class Data {
         public static String loadJSONFromAsset(Context context, String jsonFileName) throws IOException {
             AssetManager manager = context.getAssets();
             InputStream is = manager.open(jsonFileName);

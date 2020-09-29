@@ -4,7 +4,9 @@ import android.os.Handler;
 
 import androidx.databinding.ObservableField;
 
+import com.swvl.swvlchallenge.callbacks.InteractorCallback;
 import com.swvl.swvlchallenge.callbacks.OnInteractionListener;
+import com.swvl.swvlchallenge.dagger.ApplicationComponent;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.ui.base.BaseViewHolder;
 import com.swvl.swvlchallenge.ui.base.BaseViewModel;
@@ -19,11 +21,16 @@ import javax.inject.Inject;
  */
 public class MainViewModel extends BaseViewModel implements IMainViewModel, OnInteractionListener {
 
+    private  IMainInteractor interactor;
     ObservableField<List<Movie>> moviesData = new ObservableField<>(new ArrayList<>());
+
     public MovieListAdapter adapter = new MovieListAdapter(new ArrayList<>());
 
     @Inject
     public MainViewModel() {
+        ApplicationComponent appComponent = getAppComponent();
+        if (appComponent != null)
+            interactor = appComponent.getMainInteractor();
     }
 
     @Override
@@ -40,19 +47,23 @@ public class MainViewModel extends BaseViewModel implements IMainViewModel, OnIn
 
     @Override
     public void loadData() {
-        //todo load all movies
-        List<Movie> movies = new ArrayList<>();
-        Movie movie = new Movie();
-        movie.setTitle("Test");
-        movies.add(movie);
-        movies.add(movie);
-        movies.add(movie);
-        movies.add(movie);
-        movies.add(movie);
-        moviesData.set(movies);
-
+        showLoading();
+        interactor.loadAllMovies(interactorCallback);
+        adapter.setOnInteractionListener(this);
     }
+    InteractorCallback<List<Movie>> interactorCallback = new InteractorCallback<List<Movie>>() {
+        @Override
+        public void onSuccess(List<Movie> movies) {
+            hideLoading();
+            moviesData.set(movies);
+            moviesData.notifyChange();
+        }
 
+        @Override
+        public void onFailed(Throwable errors) {
+            hideLoading();
+        }
+    };
     @Override
     public void onItemClicked(Movie item) {
         //todo go to Movie screen
@@ -72,5 +83,9 @@ public class MainViewModel extends BaseViewModel implements IMainViewModel, OnIn
 
     public void setAdapter(MovieListAdapter adapter) {
         this.adapter = adapter;
+    }
+
+    public void setInteractor(MainInteractor interactor) {
+        this.interactor = interactor;
     }
 }
