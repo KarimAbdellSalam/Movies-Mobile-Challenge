@@ -27,6 +27,10 @@ public class Utils {
             public static final long READ_TIMEOUT = 120;
             public static final long TIMEOUT = 120;
         }
+
+        public class Action {
+            public static final String END_SEARCH = "action_end_search";
+        }
     }
 
     public static class UI {
@@ -64,6 +68,12 @@ public class Utils {
             is.read(buffer);
             is.close();
             return new String(buffer, "UTF-8");
+        }
+    }
+
+    public static class TextUtils {
+        public static boolean isEmpty(CharSequence str) {
+            return str == null || str.length() == 0;
         }
     }
 

@@ -1,5 +1,7 @@
 package com.swvl.swvlchallenge.ui.main;
 
+import android.app.SearchManager;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,10 +11,11 @@ import com.swvl.swvlchallenge.BR;
 import com.swvl.swvlchallenge.R;
 import com.swvl.swvlchallenge.databinding.ActivityMainBinding;
 import com.swvl.swvlchallenge.ui.base.BaseActivity;
+import com.swvl.swvlchallenge.utils.Utils;
 
 import javax.inject.Inject;
 
-public class MainActivity extends BaseActivity<MainViewModel> {
+public class MainActivity extends BaseActivity<MainViewModel> implements MainNavigator {
 
     @Inject
     MainViewModel viewModel;
@@ -46,6 +49,37 @@ public class MainActivity extends BaseActivity<MainViewModel> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = (ActivityMainBinding) getViewDataBinding();
+        viewModel.setNavigator(this);
         viewModel.loadData();
+    }
+
+    @Override
+    public void startSearching(String action, String query) {
+        Intent searchIntent = new Intent(this, MainActivity.class);
+        searchIntent.setAction(action);
+        searchIntent.putExtra(SearchManager.QUERY, query);
+        startActivity(searchIntent);
+    }
+
+    @Override
+    public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
+    private void handleIntent(Intent intent) {
+        // Special processing of the incoming intent only occurs if the if the action specified
+        // by the intent is ACTION_SEARCH.
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            String query = intent.getStringExtra(SearchManager.QUERY);
+            queryChanged(query);
+        } else if (Utils.Const.Action.END_SEARCH.equals(intent.getAction())) {
+            queryChanged("");
+        }
+    }
+
+    private void queryChanged(String query) {
+        viewModel.updateQuery(query);
     }
 }

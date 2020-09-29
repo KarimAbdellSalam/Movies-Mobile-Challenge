@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">SWVL Challenge</string>
     <string name="search_hint">Search Movies</string>
+    <string name="no_movies">No Movies</string>
 </resources>

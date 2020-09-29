@@ -31,6 +31,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0"
+            app:onCloseListener="@{viewModel.onCloseListener}"
+            app:onQueryTextListener="@{viewModel.onQueryTextListener}"
             app:queryHint="@string/search_hint"
             app:showDividers="middle" />
 
@@ -38,11 +40,12 @@
             android:id="@+id/movieAct_Rc"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
             android:background="@color/background"
             android:paddingTop="16dp"
-            app:Data="@{viewModel.moviesData}"
+            android:layout_marginTop="16dp"
+            android:visibility="@{(viewModel.resultItems.isEmpty()&amp;&amp;viewModel.query.isEmpty())?View.VISIBLE:View.GONE}"
             app:adapter="@{viewModel.adapter}"
+            app:dataItems="@{viewModel.moviesData}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +53,37 @@
             app:layout_constraintTop_toBottomOf="@+id/searchView"
             tools:listitem="@layout/movie_list_item"
             tools:visibility="visible" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/movieAct_searchResultRc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/background"
+            android:paddingTop="16dp"
+            android:layout_marginTop="16dp"
+            android:visibility="@{(viewModel.resultItems.isEmpty()&amp;&amp;viewModel.query.isEmpty())?View.GONE:View.VISIBLE}"
+            app:adapter="@{viewModel.searchResultAdapter}"
+            app:dataItems="@{viewModel.resultItems}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:listitem="@layout/header_item"
+            tools:visibility="gone" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_movies"
+            android:textColor="@color/white"
+            android:visibility="@{(viewModel.resultItems.isEmpty()&amp;&amp;!viewModel.query.isEmpty())?View.VISIBLE:View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

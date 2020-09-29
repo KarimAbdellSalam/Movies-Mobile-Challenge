@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.swvl.swvlchallenge.callbacks.InteractorCallback;
 import com.swvl.swvlchallenge.data.DataHelper;
+import com.swvl.swvlchallenge.data.model.DataItem;
 import com.swvl.swvlchallenge.data.model.Movie;
 import com.swvl.swvlchallenge.utils.rx.SchedulerProvider;
 
@@ -56,5 +57,33 @@ public class MainInteractor implements IMainInteractor {
                     }
                 });
 
+    }
+
+    @Override
+    public void searchMovies(List<Movie> movies, String query, InteractorCallback<List<DataItem>> callback) {
+        dataHelper.searchMovies(movies, query)
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(new Observer<List<DataItem>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull List<DataItem> movies) {
+                        callback.onSuccess(movies);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e("loading error", e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
