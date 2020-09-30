@@ -12,8 +12,10 @@ import android.net.NetworkInfo;
 import com.swvl.swvlchallenge.R;
 import com.swvl.swvlchallenge.data.model.FlickrResponse;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * Created by Karim Abdell Salam on 28,September,2020
@@ -82,6 +84,33 @@ public class Utils {
             is.read(buffer);
             is.close();
             return new String(buffer, "UTF-8");
+        }
+        public static byte[] readBytes(InputStream inputStream)  {
+            // this dynamically extends to take the bytes you read
+            ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+
+            // this is storage overwritten on each iteration with bytes
+            int bufferSize = 1024;
+            byte[] buffer = new byte[bufferSize];
+
+            // we need to know how may bytes were read to write them to the byteBuffer
+            int len = 0;
+            while (true) {
+                try {
+                    if (!((len = inputStream.read(buffer)) != -1)) break;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                byteBuffer.write(buffer, 0, len);
+            }
+
+            // and then we can return your byte array.
+            return byteBuffer.toByteArray();
+        }
+
+        public static <T> String loadJsonFileFromResources(Class<T> tClass,String filePath) {
+            InputStream jsonStream = Objects.requireNonNull(tClass.getClassLoader()).getResourceAsStream(filePath);
+            return new String(Utils.Data.readBytes(jsonStream));
         }
     }
 

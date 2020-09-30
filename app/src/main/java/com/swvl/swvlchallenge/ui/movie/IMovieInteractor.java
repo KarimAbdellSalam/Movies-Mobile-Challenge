@@ -12,4 +12,5 @@ public interface IMovieInteractor {
     void searchPhotos(int currentPage, int perPage, String query, InteractorCallback<FlickrResponse> callback);
 
     void filterImages(FlickrResponse flickrResponse, String title, InteractorCallback<List<FlickrResponse.Photo>> listInteractorCallback);
+
 }

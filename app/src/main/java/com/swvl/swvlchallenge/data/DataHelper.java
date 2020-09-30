@@ -40,5 +40,6 @@ public interface DataHelper extends ApiHelper {
     List<DataItem> getSectionedList(LinkedHashMap<Integer, List<Movie>> sortedLinkedMap);
 
 
+
     public Single<List<FlickrResponse.Photo>> filterMovies(FlickrResponse flickrResponse, String title);
 }

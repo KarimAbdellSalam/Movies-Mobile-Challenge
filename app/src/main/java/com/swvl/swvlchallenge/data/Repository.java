@@ -38,6 +38,7 @@ public class Repository implements DataHelper {
     private Gson gson;
     Context mContext;
     ProjectApi.FlickerApi flickerApi;
+
     @Inject
     public Repository(Retrofit retrofit, Context mContext, Gson gson) {
         flickerApi = retrofit.create(ProjectApi.FlickerApi.class);
@@ -107,7 +108,6 @@ public class Repository implements DataHelper {
 
     @NotNull
     @Override
-
     public List<Movie> getTopRatedMovies(List<Movie> movies, int maxItems) {
         return movies.stream()
                 .parallel()

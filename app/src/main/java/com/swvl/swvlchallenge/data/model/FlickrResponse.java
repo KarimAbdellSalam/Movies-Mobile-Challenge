@@ -6,6 +6,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,10 +16,10 @@ public class FlickrResponse extends BaseObservable implements Serializable {
 
     @SerializedName("photos")
     @Expose
-    private FlickrData data;
+    private FlickrData data= new FlickrData();
     @SerializedName("stat")
     @Expose
-    private String stat;
+    private String stat="";
 
     public FlickrData getPhotos() {
         return data;
@@ -40,19 +41,19 @@ public class FlickrResponse extends BaseObservable implements Serializable {
     public class FlickrData {
         @SerializedName("page")
         @Expose
-        private Integer page;
+        private int page;
         @SerializedName("pages")
         @Expose
-        private Integer pages;
+        private int pages;
         @SerializedName("perpage")
         @Expose
-        private Integer perpage;
+        private int perpage;
         @SerializedName("total")
         @Expose
-        private String total;
+        private String total="";
         @SerializedName("photo")
         @Expose
-        private List<Photo> photo = null;
+        private List<Photo> photo = new ArrayList<>();
 
         public Integer getPage() {
             return page;
@@ -96,7 +97,7 @@ public class FlickrResponse extends BaseObservable implements Serializable {
     }
 
 
-    public class Photo {
+    public static class Photo {
 
         @SerializedName("id")
         @Expose
@@ -112,16 +113,16 @@ public class FlickrResponse extends BaseObservable implements Serializable {
         private String server;
         @SerializedName("farm")
         @Expose
-        private Integer farm;
+        private int farm;
         @SerializedName("title")
         @Expose
         private String title;
         @SerializedName("ispublic")
         @Expose
-        private Integer ispublic;
+        private int ispublic;
         @SerializedName("isfriend")
         @Expose
-        private Integer isfriend;
+        private int isfriend;
         @SerializedName("isfamily")
         @Expose
         private int isfamily;

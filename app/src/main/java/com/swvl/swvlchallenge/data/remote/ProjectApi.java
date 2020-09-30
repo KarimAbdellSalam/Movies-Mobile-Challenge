@@ -20,5 +20,6 @@ public interface ProjectApi {
                                                  @Query("text") String text,
                                                  @Query("page") int page,
                                                  @Query("per_page") int per_page);
+
     }
 }

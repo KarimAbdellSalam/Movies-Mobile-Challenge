@@ -16,6 +16,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -46,7 +47,9 @@ public class MainViewModelTest {
     @Mock
     UIHelper uiHelper;
 
+    @Spy
     private MainViewModel mainViewModel;
+
     private TestScheduler mTestScheduler;
 
     @BeforeClass
@@ -58,7 +61,6 @@ public class MainViewModelTest {
         mTestScheduler = new TestScheduler();
         TestSchedulerProvider testSchedulerProvider = new TestSchedulerProvider(mTestScheduler);
         MainInteractor mainInteractor = new MainInteractor(dataHelper, testSchedulerProvider);
-        mainViewModel = new MainViewModel();
         mainViewModel.setInteractor(mainInteractor);
         mainViewModel.setUIHelper(uiHelper);
 
@@ -98,22 +100,30 @@ public class MainViewModelTest {
         dataItems.add(dataItemMovies);
         dataItems.add(dataItemMovies);
 
+        String query = "te";
+        String emptyQuery = "";
+
         doReturn(Observable.just(dataItems))
                 .when(dataHelper)
-                .searchMovies(movies, "te");
+                .searchMovies(movies, query);
+
+        doReturn(Observable.just(dataItems))
+                .when(dataHelper)
+                .searchMovies(movies, emptyQuery);
 
         mainViewModel.getMoviesData().set(movies);
-        mainViewModel.updateQuery("te");
+        mainViewModel.updateQuery(query);
         mTestScheduler.triggerActions();
 
         assertNotNull(mainViewModel.getResultItems().get());
-
-
         assertEquals(mainViewModel.getResultItems().get().getClass(), dataItems.getClass());
         assertEquals(mainViewModel.getResultItems().get(), dataItems);
+
+        mainViewModel.updateQuery(emptyQuery);
+        assertNotNull(mainViewModel.getResultItems().get());
+        assertEquals(mainViewModel.getResultItems().get().size(),0);
+
     }
-
-
 
 
     @After

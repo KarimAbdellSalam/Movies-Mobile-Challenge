@@ -50,18 +50,7 @@ public class MovieViewModel extends BaseViewModel {
         interactor.searchPhotos(currentPage, PER_PAGE, movie.getTitle(), new InteractorCallback<FlickrResponse>() {
             @Override
             public void onSuccess(FlickrResponse flickrResponse) {
-                //filter flickr list, it may reduce the number of fetched image to zero photo
-                interactor.filterImages(flickrResponse, movie.getTitle(), new InteractorCallback<List<FlickrResponse.Photo>>() {
-                    @Override
-                    public void onSuccess(List<FlickrResponse.Photo> photos) {
-                        displayImages(photos,flickrResponse);
-                    }
-
-                    @Override
-                    public void onFailed(Throwable throwable) {
-                        showToast(throwable.getMessage());
-                    }
-                });
+                filterPhotosByMovieName(flickrResponse, movie);
             }
 
             @Override
@@ -70,6 +59,22 @@ public class MovieViewModel extends BaseViewModel {
             }
         });
     }
+
+    public void filterPhotosByMovieName(FlickrResponse flickrResponse, Movie movie) {
+        //filter flickr list, it may reduce the number of fetched image to zero photo
+        interactor.filterImages(flickrResponse, movie.getTitle(), new InteractorCallback<List<FlickrResponse.Photo>>() {
+            @Override
+            public void onSuccess(List<FlickrResponse.Photo> photos) {
+                displayImages(photos,flickrResponse);
+            }
+
+            @Override
+            public void onFailed(Throwable throwable) {
+                showToast(throwable.getMessage());
+            }
+        });
+    }
+
     /* check the list size to get at least ${MIN_IMAGES} images of exact movie
      if there are no enough photos fetch another page (at most ${MAX_PAGES})
      */
@@ -128,4 +133,5 @@ public class MovieViewModel extends BaseViewModel {
     public void setInteractor(MovieInteractor interactor) {
         this.interactor = interactor;
     }
+
 }
