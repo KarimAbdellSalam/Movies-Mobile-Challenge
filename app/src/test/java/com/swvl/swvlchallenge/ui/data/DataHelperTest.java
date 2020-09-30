@@ -115,7 +115,7 @@ public class DataHelperTest {
         assertNotNull(topRatedMovies);
         assertEquals(topRatedMovies.size(), 10);
         assertEquals(topRatedMovies.get(0).getRating() >= topRatedMovies.get(1).getRating(), true);
-        assertEquals(repository.getTopRatedMovies(getMoviesJsonFile().getMovies(), 5).size(), 5); 
+        assertEquals(repository.getTopRatedMovies(getMoviesJsonFile().getMovies(), 5).size(), 5);
     }
 
     public Map<Integer, List<Movie>> getIntegerListMap() {
