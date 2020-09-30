@@ -22,7 +22,7 @@ those movies and the signature they left behind.
 flickrBaseURL="https://api.flickr.com/"
 flickrApiKey="<Flicker api key>"
   
-# Debug Values:
+#Debug Values:
   
 flickrBaseURLDev="https://api.flickr.com/"
 flickrApiKeyDev="<Flicker api key>"
