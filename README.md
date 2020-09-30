@@ -16,9 +16,14 @@ those movies and the signature they left behind.
 #### copy and paste those lines to local.properties file in order to run the project.
 #in our case the base url and api key for both developement and live versions are the same.
 #replace 
+
+```gradle
 #Release values:
 flickrBaseURL="https://api.flickr.com/"
 flickrApiKey="<Flicker api key>"
+  
 #Debug Values:
 flickrBaseURLDev="https://api.flickr.com/"
 flickrApiKeyDev="<Flicker api key>"
+
+```
