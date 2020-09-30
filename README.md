@@ -13,9 +13,9 @@ those movies and the signature they left behind.
 5. **ui**: View classes along with their corresponding ViewModel.
 6. **utils**: Utility classes.
 
-#### copy and paste those lines to local.properties file in order to run the project.
+#### add the below lines to local.properties file in order to run the project correctly.
 #in our case the base url and api key for both developement and live versions are the same.
-#replace 
+
 
 ```gradle
 #Release values:
