@@ -7,7 +7,7 @@ those movies and the signature they left behind.
 
 #### The app has following packages:
 1. **adapters** It Contains Binding Adapters
-2. **callbacks** It Contains Binding Adapters
+2. **callbacks** It Contains callback interfaces
 3. **data**: It contains all the data accessing and manipulating components.
 4. **dagger**: Dependency providing classes using Dagger2.
 5. **ui**: View classes along with their corresponding ViewModel.
